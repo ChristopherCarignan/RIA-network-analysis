@@ -32,10 +32,10 @@ network.clusters <- function(RIA.table) {
       }
       
       # Scale the similarity matrix: 0-1
-      sim.mats <- (dists - min(dists)) / (1 - min(dists))
+      sim.matx <- (dists - min(dists)) / (1 - min(dists))
       
       # Create a blank network graph for the spinglass algorithm
-      graph1 <- qgraph(sim.mats, layout="groups", graph="cor", sampleSize=length(plist), DoNotPlot=T)
+      graph1 <- qgraph(sim.matx, layout="groups", graph="cor", sampleSize=length(plist), DoNotPlot=T)
       
       g   <- as.igraph(graph1, attributes=T) # Convert to igraph
       sgc <- spinglass.community(g) # Perform spinglass algorithm to get groupings/clusters
