@@ -1,5 +1,6 @@
 library(ggplot2)
 library(gridExtra)
+library(tidyr)
 library(dplyr)
 library(igraph)
 library(qgraph)
@@ -21,6 +22,12 @@ diffdata <- oral.nasal.matching(imdata, myseed)
 
 # Run the function for the relative importance analysis (RIA)
 RIA.table <- RIA(diffdata, myseed)
+
+# Summarize articulatory variable rankings
+RIA.table  %>%
+  group_by(vars, ranks) %>%
+  summarise(n = n()) %>%
+  mutate(freq = 100*n / sum(n))
 
 # Run the function for determining the number of network clusters in 100 random seeds
 clust.dat <- network.clusters(RIA.table)
