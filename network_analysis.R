@@ -22,6 +22,11 @@ diffdata <- oral.nasal.matching(imdata, myseed)
 # Run the function for the relative importance analysis (RIA)
 RIA.table <- RIA(diffdata, myseed)
 
+# Run the function to perform vowel-wise cross validation of linear models for each speaker
+cross.val   <- lm.cross.validation(diffdata, myseed) 
+cross.val.R <- cross.val[1] # Get the correlation coefficients
+cross.val.P <- cross.val[2] # Get the p-values
+
 # Summarize articulatory variable rankings
 RIA.table %>% group_by(vars, ranks) %>% summarise(n = n()) %>% mutate(freq = 100*n / sum(n))
 
@@ -54,7 +59,7 @@ seeds   <- o.seeds[o.seeds %in% matches]
 
 
 # Pick a new seed for clustering!
-myseed <- 4
+myseed <- 44
 
 # Run the function for performing RIA coefficient Euclidean distance measurements and getting average F1 values
 ED.output <- ED.measurements(RIA.table, diffdata, myseed)
@@ -65,13 +70,13 @@ sim.mats.sc   <- ED.output[[3]] # Scaled similarity matrices
 groupings     <- ED.output[[4]] # Cluster groupings for plotting
 
 
-
+# Plot results
 mycols  <- brewer.pal(12, "Set3") # Create qualitative color palette for plotting
 npars   <- length(unique(diffdata$participant)) # The number of participants is needed for various network plotting variables
 
 # Plot a network graph
 # Example given here for the /a/-/~a/ vowel pair
-qgraph(sim.mats.sc$a, layout="groups", graph="cor", sampleSize=npars, groups=groupings$a,
+qgraph(sim.mats.sc$e, layout="groups", graph="cor", sampleSize=npars, groups=groupings$e,
        posCol="orange", color=mycols, legend=T, GLratio=10, legend.cex=1,
        layout.par = list(init=matrix(rnorm(npars*2), npars, 2)),
        vsize=7, cut=0, border.width=1.5)
