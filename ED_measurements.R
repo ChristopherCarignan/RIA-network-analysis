@@ -1,7 +1,5 @@
 ### Euclidean distance measures between speakers
 ED.measurements <- function(RIA.table, diffdata, myseed) {
-  set.seed(myseed)
-  
   # Preallocate arrays
   RIA.table$cluster   <- c()
   RIA.table$cluster2  <- c()
@@ -14,6 +12,7 @@ ED.measurements <- function(RIA.table, diffdata, myseed) {
   plist <- levels(RIA.table$participant) # List of all participant names
   
   for (vowel in c('a','e','o')){
+    set.seed(myseed)
     subdata <- RIA.table[RIA.table$vowel==vowel,] # Get unique data set
     
     subdata$cluster <- c()
