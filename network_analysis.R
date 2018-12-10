@@ -59,7 +59,7 @@ seeds   <- o.seeds[o.seeds %in% matches]
 
 
 # Pick a new seed for clustering!
-myseed <- 44
+myseed <- 3
 
 # Run the function for performing RIA coefficient Euclidean distance measurements and getting average F1 values
 ED.output <- ED.measurements(RIA.table, diffdata, myseed)
@@ -76,7 +76,7 @@ npars   <- length(unique(diffdata$participant)) # The number of participants is 
 
 # Plot a network graph
 # Example given here for the /a/-/~a/ vowel pair
-qgraph(sim.mats.sc$e, layout="groups", graph="cor", sampleSize=npars, groups=groupings$e,
+qgraph(sim.mats.sc$a, layout="groups", graph="cor", sampleSize=npars, groups=groupings$a,
        posCol="orange", color=mycols, legend=T, GLratio=10, legend.cex=1,
        layout.par = list(init=matrix(rnorm(npars*2), npars, 2)),
        vsize=7, cut=0, border.width=1.5)
@@ -92,7 +92,8 @@ p1 <- ggplot(plotdat[plotdat$vars!='f1',], aes(x=vars, y=coeffs, fill=cluster2))
   geom_vline(xintercept=1.5) + geom_vline(xintercept=2.5) +
   xlab('Articulatory variable') + ylab('Relative importance coefficient') +
   scale_x_discrete(breaks=c("cq","height","nasalance"), labels=c("Contact quotient","Tongue height","Nasalance")) +
-  scale_fill_manual(values = mycols) +  theme_bw()  + theme(legend.position="none")
+  scale_fill_manual(values = mycols) + theme_bw() + theme(legend.position="none",axis.text=element_text(size=14),
+                                                            axis.title=element_text(size=15))
 
 # Average acoustic/articulatory variables, by group
 p2 <- ggplot(plotdat, aes(x=vars, y=means, fill=cluster2)) + 
@@ -100,7 +101,8 @@ p2 <- ggplot(plotdat, aes(x=vars, y=means, fill=cluster2)) +
   geom_vline(xintercept=1.5) + geom_vline(xintercept=2.5) + geom_vline(xintercept=3.5) +
   xlab('Articulatory/acoustic variable') + ylab('Average nasal-oral z-score difference') +
   scale_x_discrete(breaks=c("cq","height","nasalance","f1"), labels=c("Contact quotient","Tongue height","Nasalance","F1")) +
-  scale_fill_manual(values = mycols) +  theme_bw()  + theme(legend.position="none")
+  scale_fill_manual(values = mycols) + theme_bw() + theme(legend.position="none",axis.text=element_text(size=14),
+                                                            axis.title=element_text(size=15))
 
 # Combine both plots
 myplot <- grid.arrange(p1, p2, ncol=1, nrow=2)
