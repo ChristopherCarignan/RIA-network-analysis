@@ -17,13 +17,13 @@ imdata$ident <- as.numeric(as.factor(paste0(imdata$imitator, imdata$order)))
 myseed <- 105
 
 # Run the function for randomized nasal-oral matched pairing
-diffdata <- oral.nasal.matching(imdata, myseed)
+diffdata <- oral_nasal_matching(imdata, myseed)
 
 # Run the function for the relative importance analysis (RIA)
 RIA.table <- RIA(diffdata, myseed)
 
 # Run the function to perform vowel-wise cross validation of linear models for each speaker
-cross.val   <- lm.cross.validation(diffdata, myseed) 
+cross.val   <- lm_cross_validation(diffdata, myseed) 
 cross.val.R <- cross.val[1] # Get the correlation coefficients
 cross.val.P <- cross.val[2] # Get the p-values
 
@@ -31,7 +31,7 @@ cross.val.P <- cross.val[2] # Get the p-values
 RIA.table %>% group_by(vars, ranks) %>% summarise(n = n()) %>% mutate(freq = 100*n / sum(n))
 
 # Run the function for determining the number of network clusters in 100 random seeds
-clust.dat <- network.clusters(RIA.table)
+clust.dat <- network_clusters(RIA.table)
 
 # Print summaries for each vowel pair to determine the cluster frequency for each vowel pair
 summary(clust.dat$clusters[clust.dat$vowel=='a'])
@@ -62,7 +62,7 @@ seeds   <- o.seeds[o.seeds %in% matches]
 myseed <- 3
 
 # Run the function for performing RIA coefficient Euclidean distance measurements and getting average F1 values
-ED.output <- ED.measurements(RIA.table, diffdata, myseed)
+ED.output <- ED_measurements(RIA.table, diffdata, myseed)
 
 RIA.table.new <- ED.output[[1]] # New RIA table with clustering info and average F1 values
 sim.mats      <- ED.output[[2]] # Distance-based similarity score matricies

@@ -1,5 +1,5 @@
 # Perform within-participant, between-vowel cross validation on linear models
-lm.cross.validation <- function(diffdata, myseed) {
+lm_cross_validation <- function(diffdata, myseed) {
   set.seed(myseed)
   
   # Create lists of names for all participants, naive AE imitators, and native FR speakers

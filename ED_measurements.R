@@ -1,5 +1,5 @@
 ### Euclidean distance measures between speakers
-ED.measurements <- function(RIA.table, diffdata, myseed) {
+ED_measurements <- function(RIA.table, diffdata, myseed) {
   # Preallocate arrays
   RIA.table$cluster   <- c()
   RIA.table$cluster2  <- c()
