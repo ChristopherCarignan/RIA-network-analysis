@@ -1,5 +1,5 @@
 # Randomized oral-nasal matching
-oral.nasal.matching <- function(mydata, myseed) {
+oral_nasal_matching <- function(mydata, myseed) {
   set.seed(myseed)
   diffdata <- c()
   
