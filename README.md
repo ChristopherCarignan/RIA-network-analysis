@@ -1,8 +1,8 @@
 # RIA-network-analysis
-Data and R code for relative importance analysis (RIA) and network analysis (Carignan, 2018, Speech Communication)
+Data and R code for relative importance analysis (RIA) and network analysis: Carignan, C. (2019), "A network-modeling approach to investigating individual differences in articulatory-to-acoustic relationship strategies." Speech Communication, DOI: 10.1016/j.specom.2019.01.007.
 
 
-This repository provides the data and R functions necessary to replicate the results from Carignan (2018, Speech Communication).
+This repository provides the data and R functions necessary to replicate the results from Carignan (2019, Speech Communication).
 
 
 Save the following data set into your R working directory: imitation_data.csv
